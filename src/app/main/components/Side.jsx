@@ -1,17 +1,67 @@
-import React from 'react'
+'use client';
+
+import React from 'react';
+import Image from 'next/image';
+import TableImage from '@/assets/images/table.png';
+import QrGenerator from './qr-generator';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog';
 
 export default function Side() {
-  return (
-    <div className="p-10 w-full flex  flex-col justify-center align-middle h-full ">
-    <h1 className='font-medium flex w-1/2 justify-center'>Tables orders </h1>
-     <div className='grid grid-cols-2 justify-center w-full gap-4 h-full m-5'>
+    const fakeTables = [1, 3, 4, 5, 6, 7, 8];
 
-     <p className='bg-[#FFD099] rounded-md w-2/4 h-12 font-bold p-7'>1</p>
-     <p className='bg-[#FFD099] rounded-md w-2/4 h-12 font-bold p-7'> 2</p>
-     <p className='bg-[#FFD099] rounded-md w-2/4 h-12 font-bold p-7' > 3</p>
-     <p className='bg-[#FFD099] rounded-md w-2/4 h-12 font-bold p-7'> 4</p>
-     </div>
-    
-    </div>
-  )
+    return (
+        <div className='bg-[#FFD099] h-full p-6 space-y-5 relative'>
+            {/*  */}
+            <p className='font-bold text-lg mt-5'>Table Orders : </p>
+
+            {/*  */}
+
+            <div className='grid grid-cols-3 gap-5'>
+                {fakeTables.map((el) => (
+                    <div
+                        className='rounded-md p-1 bg-white border-gray border-2'
+                        key={el}
+                    >
+                        <div className='h-[70px] relative rounded-md overflow-hidden'>
+                            <Image
+                                src={TableImage}
+                                fill
+                                alt='image'
+                                cover
+                            />
+                        </div>
+                        {/*  */}
+                        <p className='text-center'>Table {el}</p>
+                    </div>
+                ))}
+            </div>
+
+            {/*  */}
+
+            <div className='pr-12 absolute bottom-[10px] w-full'>
+                <Dialog>
+                    <DialogTrigger className='w-full bg-gray-900 p-2 rounded-md cursor-pointer text-white'>
+                        Generate Qr's
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle className='text-center mb-5 '>
+                                Table Orders
+                            </DialogTitle>
+                            <DialogDescription>
+                                <QrGenerator data={fakeTables} />
+                            </DialogDescription>
+                        </DialogHeader>
+                    </DialogContent>
+                </Dialog>
+            </div>
+        </div>
+    );
 }
