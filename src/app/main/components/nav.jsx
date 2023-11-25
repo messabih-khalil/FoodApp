@@ -18,6 +18,9 @@ import TableImage from '@/assets/images/table.png';
 
 // =======
 export default function nav() {
+
+
+    
     return (
         <div className='flex w-full gap-x-11 m-5 justify-between items-center pr-12'>
             <div className='flex gap-2 items-center text-2xl'>

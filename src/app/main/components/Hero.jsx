@@ -9,22 +9,9 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import CounterBox from './CounterBox';
 
 export default function Hero() {
-    const [counter, setCounter] = useState(0);
-
-    function decrementCounter() {
-        setCounter((prev) => {
-            return prev - 1;
-        });
-    }
-
-    function incrementCounter() {
-        setCounter((prev) => {
-            return prev + 1;
-        });
-    }
-
     return (
         <div className='p-6'>
             <h1 className='text-xl font-bold mb-5'>pizza</h1>
@@ -47,24 +34,7 @@ export default function Hero() {
                             <p className='text-gray-500'>450.da</p>
                         </CardContent>
                         <CardFooter className='flex rounded-md p-0 gap-2 border bg-white'>
-                            <div className='flex justify-between w-full items-center'>
-                                <Button
-                                    className='rounded-md font-black bg-transparent hover:bg-transparent text-black text-lg'
-                                    onClick={decrementCounter}
-                                >
-                                    -
-                                </Button>
-                                <p className='rounded-md font-black bg-transparent hover:bg-transparent text-black'>
-                                    {counter}
-                                </p>
-                                <Button
-                                    className='rounded-md font-black bg-transparent hover:bg-transparent text-black text-lg'
-                                    onClick={incrementCounter}
-                                >
-                                    +
-                                </Button>
-                            </div>
-                            <Button className='rounded-md '>Add</Button>
+                              <CounterBox/>
                         </CardFooter>
                     </Card>
                 ))}
