@@ -12,6 +12,16 @@ import Image from 'next/image';
 import CounterBox from './CounterBox';
 
 export default function Hero() {
+    const addToBucket = (item = {}, counter) => {
+        const otherOrders =
+            JSON.parse(localStorage.getItem('currentOrder')) || [];
+
+        localStorage.setItem(
+            'currentOrder',
+            JSON.stringify([...otherOrders, { ...item, counter }])
+        );
+    };
+
     return (
         <div className='p-6'>
             <h1 className='text-xl font-bold mb-5'>pizza</h1>
@@ -34,7 +44,14 @@ export default function Hero() {
                             <p className='text-gray-500'>450.da</p>
                         </CardContent>
                         <CardFooter className='flex rounded-md p-0 gap-2 border bg-white'>
-                              <CounterBox/>
+                            <CounterBox
+                                addToBucket={addToBucket}
+                                product={{
+                                    id: el,
+                                    name: `pizza ${el}`,
+                                    price: el * 100,
+                                }}
+                            />
                         </CardFooter>
                     </Card>
                 ))}

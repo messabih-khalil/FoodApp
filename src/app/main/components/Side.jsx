@@ -14,7 +14,9 @@ import {
 } from '@/components/ui/dialog';
 
 export default function Side() {
-    const fakeTables = [1, 3, 4, 5, 6, 7, 8];
+    const orderedTable = (
+        JSON.parse(localStorage.getItem('tablesOrder')) || []
+    ).map((el) => Object.keys(el)[0]);
 
     return (
         <div className='bg-[#FFD099] h-full p-6 space-y-5 relative'>
@@ -24,7 +26,7 @@ export default function Side() {
             {/*  */}
 
             <div className='grid grid-cols-3 gap-5'>
-                {fakeTables.map((el) => (
+                {orderedTable.map((el) => (
                     <div
                         className='rounded-md p-1 bg-white border-gray border-2'
                         key={el}
@@ -38,7 +40,7 @@ export default function Side() {
                             />
                         </div>
                         {/*  */}
-                        <p className='text-center'>Table {el}</p>
+                        <p className='text-center'>{el}</p>
                     </div>
                 ))}
             </div>
@@ -56,7 +58,7 @@ export default function Side() {
                                 Table Orders
                             </DialogTitle>
                             <DialogDescription>
-                                <QrGenerator data={fakeTables} />
+                                <QrGenerator data={orderedTable} />
                             </DialogDescription>
                         </DialogHeader>
                     </DialogContent>
