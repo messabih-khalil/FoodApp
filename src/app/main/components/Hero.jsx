@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import CounterBox from './CounterBox';
 
-export default function Hero() {
+export default function Hero({ setRefresh }) {
     const addToBucket = (item = {}, counter) => {
         const otherOrders =
             JSON.parse(localStorage.getItem('currentOrder')) || [];
@@ -20,6 +20,8 @@ export default function Hero() {
             'currentOrder',
             JSON.stringify([...otherOrders, { ...item, counter }])
         );
+
+        setRefresh((prev) => !prev);
     };
 
     return (

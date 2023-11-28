@@ -17,7 +17,7 @@ import Image from 'next/image';
 import TableImage from '@/assets/images/table.png';
 
 // =======
-export default function nav() {
+export default function nav({ setRefresh }) {
     const [clicked, setClicked] = useState(false);
 
     const addToTable = (tabelName) => {
@@ -38,6 +38,8 @@ export default function nav() {
         localStorage.removeItem('currentOrder');
 
         setClicked((prev) => !prev);
+
+        setRefresh((prev) => !prev);
     };
 
     const orderedTable = JSON.parse(localStorage.getItem('tablesOrder')) || [];

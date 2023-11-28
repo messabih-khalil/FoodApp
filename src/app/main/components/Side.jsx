@@ -13,7 +13,7 @@ import {
     DialogTrigger,
 } from '@/components/ui/dialog';
 
-export default function Side() {
+export default function Side({ setRefresh }) {
     const orderedTable = (
         JSON.parse(localStorage.getItem('tablesOrder')) || []
     ).map((el) => Object.keys(el)[0]);
@@ -58,7 +58,7 @@ export default function Side() {
                                 Table Orders
                             </DialogTitle>
                             <DialogDescription>
-                                <QrGenerator data={orderedTable} />
+                                <QrGenerator data={orderedTable} setRefresh={setRefresh}/>
                             </DialogDescription>
                         </DialogHeader>
                     </DialogContent>
