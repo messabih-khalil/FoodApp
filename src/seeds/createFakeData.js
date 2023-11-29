@@ -1,4 +1,4 @@
-import { addProduct } from '@/app/main/actions/createProduct';
+import { addProduct } from '@/app/(pages)/main/actions/createProduct';
 
 const fakeData = [
     {

@@ -19,7 +19,7 @@ export default function Hero({ setRefresh }) {
 
         localStorage.setItem(
             'currentOrder',
-            JSON.stringify([...otherOrders, { ...item, counter }])
+            JSON.stringify([...otherOrders, { ...item, quantity: counter }])
         );
 
         setRefresh((prev) => !prev);
@@ -31,7 +31,12 @@ export default function Hero({ setRefresh }) {
 
     useEffect(() => {
         const fetchData = async () => {
+            
             const data = await getProducts();
+
+            console.log('====================================');
+            console.log(data);
+            console.log('====================================');
             setProductData(data);
         };
         fetchData();

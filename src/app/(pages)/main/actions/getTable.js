@@ -8,7 +8,11 @@ export async function getTables() {
 
         const collection = database.collection('tables'); // Choose a name for your collection
 
-        return await collection.find({}, { _id: 0 }).toArray();
+        const data = await collection.find({}, { _id: 0 }).toArray();
+
+        const filteredData = data.map((e) => ({ tableName: e.tableName }));
+
+        return filteredData;
     } catch (error) {
         console.log('====================================');
         console.log(error);

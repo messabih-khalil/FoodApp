@@ -26,10 +26,12 @@ const QrGenerator = ({ data, setRefresh }) => {
                             maxWidth: '100%',
                             width: '100%',
                         }}
-                        value={JSON.stringify(currentOrders[tableCounter])}
+                        value={
+                            JSON.stringify(currentOrders[tableCounter]) + ';'
+                        }
                         viewBox={`0 0 150 150`}
                     />
- 
+
                     <Button
                         onClick={() => {
                             deleteTableFromReceived(data[tableCounter]);

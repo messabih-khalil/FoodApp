@@ -21,6 +21,7 @@ const LoginPage = () => {
 
             if (isDefined != null) {
                 localStorage.setItem('userInfo', JSON.stringify(isDefined));
+                localStorage.setItem('isLogedIn', true);
                 router.push('/main');
             } else {
                 toast({
