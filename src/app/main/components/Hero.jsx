@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Card,
     CardContent,
@@ -7,9 +7,10 @@ import {
     CardFooter,
     CardHeader,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+
 import Image from 'next/image';
 import CounterBox from './CounterBox';
+import { getProducts } from '../actions/getProducts';
 
 export default function Hero({ setRefresh }) {
     const addToBucket = (item = {}, counter) => {
@@ -26,49 +27,24 @@ export default function Hero({ setRefresh }) {
 
     // const fake data
 
-    const fakeData = [
-        {
-            id: 1,
-            name: 'pizza simple',
-            imageUrl:
-                'https://www.foodandwine.com/thmb/Wd4lBRZz3X_8qBr69UOu2m7I2iw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/classic-cheese-pizza-FT-RECIPE0422-31a2c938fc2546c9a07b7011658cfd05.jpg',
-            category: '',
-            price: 200,
-        },
-        {
-            id: 2,
-            name: 'pizza simple',
-            imageUrl:
-                'https://www.foodandwine.com/thmb/Wd4lBRZz3X_8qBr69UOu2m7I2iw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/classic-cheese-pizza-FT-RECIPE0422-31a2c938fc2546c9a07b7011658cfd05.jpg',
-            category: '',
-            price: 200,
-        },
-        {
-            id: 3,
-            name: 'pizza simple',
-            imageUrl:
-                'https://www.foodandwine.com/thmb/Wd4lBRZz3X_8qBr69UOu2m7I2iw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/classic-cheese-pizza-FT-RECIPE0422-31a2c938fc2546c9a07b7011658cfd05.jpg',
-            category: '',
-            price: 200,
-        },
-        {
-            id: 4,
-            name: 'pizza simple',
-            imageUrl:
-                'https://www.foodandwine.com/thmb/Wd4lBRZz3X_8qBr69UOu2m7I2iw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/classic-cheese-pizza-FT-RECIPE0422-31a2c938fc2546c9a07b7011658cfd05.jpg',
-            category: '',
-            price: 200,
-        },
-    ];
+    const [productsData, setProductData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getProducts();
+            setProductData(data);
+        };
+        fetchData();
+    }, []);
 
     return (
         <div className='p-6'>
             <h1 className='text-xl font-bold mb-5'>pizza</h1>
-            <div className='grid grid-cols-4 gap-4'>
-                {fakeData.map((el) => (
+            <div className='grid grid-cols-3 lg:grid-cols-4 gap-4'>
+                {productsData.map((el, index) => (
                     <Card
                         className='p-2 bg-[#FFD099]'
-                        key={el}
+                        key={index}
                     >
                         <CardHeader className='h-[150px] relative rounded-md overflow-hidden'>
                             <Image

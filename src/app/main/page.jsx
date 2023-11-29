@@ -7,14 +7,24 @@ import Side from './components/Side';
 const page = () => {
     const [refresh, setRefresh] = useState(false);
 
+    const [showSideBar, setShowSideBar] = useState(false);
+
     return (
         <div className='flex w-full gap-3'>
-            <div className='w-full m-5 pr-[350px]'>
+            <div className='w-full m-5 '>
                 <Nav setRefresh={setRefresh} />
                 <Hero setRefresh={setRefresh} />
             </div>
-            <div className='border-solid h-screen w-[350px] fixed right-0 top-0'>
-                <Side setRefresh={setRefresh} />
+            <div
+                className={
+                    'border-solid h-screen w-[350px] fixed  top-0 ' +
+                    `${showSideBar ? 'right-0' : 'right-[-350px]'}`
+                }
+            >
+                <Side
+                    setRefresh={setRefresh}
+                    setShowSideBar={setShowSideBar}
+                />
             </div>
         </div>
     );

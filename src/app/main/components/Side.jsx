@@ -12,14 +12,27 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQrcode } from '@fortawesome/free-solid-svg-icons';
 
-export default function Side({ setRefresh }) {
+export default function Side({ setRefresh, setShowSideBar }) {
     const orderedTable = (
         JSON.parse(localStorage.getItem('tablesOrder')) || []
     ).map((el) => Object.keys(el)[0]);
 
     return (
         <div className='bg-[#FFD099] h-full p-6 space-y-5 relative'>
+            <Button
+                className='p-5 bg-[#FFD099] top-[40px] left-[-40px] absolute'
+                onClick={() => setShowSideBar((prev) => !prev)}
+            >
+                <FontAwesomeIcon
+                    icon={faQrcode}
+                    color='black'
+                />
+            </Button>
+
             {/*  */}
             <p className='font-bold text-lg mt-5'>Table Orders : </p>
 
@@ -58,7 +71,10 @@ export default function Side({ setRefresh }) {
                                 Table Orders
                             </DialogTitle>
                             <DialogDescription>
-                                <QrGenerator data={orderedTable} setRefresh={setRefresh}/>
+                                <QrGenerator
+                                    data={orderedTable}
+                                    setRefresh={setRefresh}
+                                />
                             </DialogDescription>
                         </DialogHeader>
                     </DialogContent>
